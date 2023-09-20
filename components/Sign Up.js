@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 
 const App = () => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (username === "usuario" && password === "contraseña") {
-      alert("Inicio de sesión exitoso");
+  const handleSignUp = () => {
+    if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+      alert("Por favor, complete todos los campos.");
     } else {
-      alert("Nombre de usuario o contraseña incorrectos");
+      alert("Registro exitoso");
     }
   };
 
@@ -20,25 +21,33 @@ const App = () => {
         style={styles.image}
       />
       <Text style={styles.appName}>TaskMaster</Text>
-      <Text style={styles.loginText}>Login</Text>
+      <Text style={styles.signupText}>Sign Up</Text>
       <TextInput
         style={styles.input}
-        placeholder="Nombre de usuario o correo electrónico"
-        onChangeText={(text) => setUsername(text)}
-        value={username}
+        placeholder="Name"
+        onChangeText={(text) => setName(text)}
+        value={name}
       />
       <TextInput
         style={styles.input}
-        placeholder="Contraseña"
+        placeholder="Email"
+        onChangeText={(text) => setEmail(text)}
+        value={email}
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
         secureTextEntry={true}
         onChangeText={(text) => setPassword(text)}
         value={password}
       />
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginButtonText}>Login</Text>
+      <TouchableOpacity style={styles.signupButton} onPress={handleSignUp}>
+        <Text style={styles.signupButtonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.forgotPassword}>
-        <Text>Forgot Password?</Text>
+      <Text style={styles.orText}>Or</Text>
+      <TouchableOpacity style={styles.loginRedirect}>
+        <Text>Already have an account? Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginVertical: 10
   },
-  loginText: {
+  signupText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10
@@ -74,19 +83,23 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10
   },
-  loginButton: {
+  signupButton: {
     backgroundColor: 'blue',
     padding: 10,
     borderRadius: 5,
     width: 300,
     alignItems: 'center'
   },
-  loginButtonText: {
+  signupButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold'
   },
-  forgotPassword: {
+  orText: {
+    marginVertical: 10,
+    fontWeight: 'bold'
+  },
+  loginRedirect: {
     marginVertical: 10
   }
 });
